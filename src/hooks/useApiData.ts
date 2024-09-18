@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { apiInstance } from "./axiosInstance";
 
-interface TodoProps {
+export type TodoProps = {
   id?: number;
   title: string;
   description: string;
   isComplete: boolean;
   targetId: number;
 }
-interface TargetProps {
+export type TargetProps = {
   id?: number;
   title: string;
   description: string;
@@ -49,9 +49,12 @@ const useApiData = () => {
     }
   };
 
-  const postTarget = async (description: TargetProps) => {
+  const postTarget = async (description: Omit<TargetProps, "isComplete">) => {
     try {
-      const response = await apiInstance.post("Targets", { ...description });
+      const response = await apiInstance.post("Targets", {
+        isComplete: false,
+        ...description
+      });
       console.log(response.data);
     } catch (error) {
       console.error("Erro na requisição:", error);
@@ -60,7 +63,7 @@ const useApiData = () => {
 
   const putTarget = async (targetId: number, updates: Omit<TargetProps, "id">) => {
     try {
-      const response = await apiInstance.post(`Targets/${targetId}`, {
+      const response = await apiInstance.put(`Targets/${targetId}`, {
         id: targetId,
         ...updates
       });
@@ -103,9 +106,12 @@ const useApiData = () => {
     }
   };
 
-  const postTodo = async (description: TodoProps) => {
+  const postTodo = async (description: Omit<TodoProps, "isComplete">) => {
     try {
-      const response = await apiInstance.post("Todo", { ...description });
+      const response = await apiInstance.post("Todo", {
+        isComplete: false,
+        ...description
+      });
       console.log(response.data);
     } catch (error) {
       console.error("Erro na requisição:", error);

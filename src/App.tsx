@@ -1,8 +1,8 @@
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Target from "./pages/Target";
 import ToDo from "./pages/ToDo";
 import NavBar from "./components/NavBar";
+import "./index.css"
 
 function App() {
   return (
