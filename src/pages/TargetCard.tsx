@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { TargetProps } from "../hooks/useApiData";
 import { FaRegTrashAlt, FaArrowDown, FaArrowUp, FaPen } from "react-icons/fa";
+import { TargetProps } from "../hooks/useApiData";
 
 type TargetCardProps = {
   target: TargetProps;
   onDeleteTarget: (id: number) => void;
-  onEdit: (id: number) => void;
+  onEdit: (target: TargetProps) => void;
 };
 
 const TargetCard = ({ target, onDeleteTarget, onEdit }: TargetCardProps) => {
@@ -20,42 +20,42 @@ const TargetCard = ({ target, onDeleteTarget, onEdit }: TargetCardProps) => {
             onClick={() => setShowToDos(!showToDos)}
             className="bg-gray-500 hover:bg-slate-600 px-3 py-2 rounded-lg"
           >
-            {showToDos === true ? (
+            {!showToDos ? (
               <FaArrowDown className="text-white" />
             ) : (
               <FaArrowUp className="text-white" />
             )}
           </button>
+          {target.id && (
+            <button
+              onClick={() => onDeleteTarget(target.id!)}
+              className="bg-red-500 hover:bg-red-600 px-3 py-2 rounded-lg"
+            >
+              <FaRegTrashAlt className="text-white" />
+            </button>
+          )}
           <button
-            onClick={() => onDeleteTarget(target.id!)}
-            className="bg-red-500 hover:bg-red-600 px-3 py-2 rounded-lg"
-          >
-            <FaRegTrashAlt className="text-white" />
-          </button>
-          <button
-            onClick={() => onEdit(target.id!)}
+            onClick={() => onEdit(target)}
             className="bg-gray-300 hover:bg-slate-400 px-3 py-2 rounded-lg"
           >
             <FaPen />
           </button>
         </div>
       </div>
-      <div>
-        {showToDos ? (
-          <div>
-            <p>
-              {target.todo.map((todo) => (
-                <div>
-                  <p>{todo.title}</p>
-                  <p>{todo.description}</p>
-                </div>
-              ))}
-            </p>
-          </div>
-        ) : (
-          <p>Não há ToDos no momento</p>
-        )}
-      </div>
+      {showToDos && (
+        <div>
+          {target.todo.length > 0 ? (
+            target.todo.map((todo, index) => (
+              <div key={index} className="mt-2">
+                <p className="font-bold">{todo.title}</p>
+                <p>{todo.description}</p>
+              </div>
+            ))
+          ) : (
+            <p>Não há ToDos no momento</p>
+          )}
+        </div>
+      )}
     </>
   );
 };

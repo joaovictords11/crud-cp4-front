@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Target from "./pages/Target";
+import Targets from "./pages/Targets";
 import ToDo from "./pages/ToDo";
 import NavBar from "./components/NavBar";
 import "./index.css"
@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <NavBar/>
       <Routes>
-        <Route path="/" element={<Target/>}/>
+        <Route path="/" element={<Targets/>}/>
         <Route path="/todos" element={<ToDo/>}/>
       </Routes>
     </BrowserRouter>
@@ -17,39 +17,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <div>
-  <h1>Get - Todos:</h1>
-  {todos.map((tarefa) => {
-    return (
-      <div key={tarefa.id}>
-        <h3>{tarefa.title}</h3>
-        <p>{tarefa.description}</p>
-        {tarefa.id !== undefined && (
-          <button onClick={() => excluirTodo(tarefa.id!)}>Excluir</button>
-        )}
-      </div>
-    );
-  })}
-  <h1>Get - Targets:</h1>
-  {targets.map((target) => {
-    return (
-      <div key={target.id}>
-        <h3>{target.title}</h3>
-        <p>{target.description}</p>
-        {target.id !== undefined && (
-          <button onClick={() => excluirTarget(target.id!)}>Excluir Target</button>
-        )}
-        {target.todo.map((tarefinha) => {
-          return (
-            <div key={tarefinha.id}>
-              <p>todo: {tarefinha.title}</p>
-            </div>
-          );
-        })}
-      </div>
-    );
-  })}
-</div> */
-}
