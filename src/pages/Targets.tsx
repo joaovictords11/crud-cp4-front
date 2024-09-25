@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useApiData, { TargetProps } from "../hooks/useApiData";
-import TargetCard from "./TargetCard";
+import TargetCard from "../components/TargetCard";
 import TargetEditModal from "../components/TargetEditModal";
 import useFormData from "../hooks/useFormData";
 
