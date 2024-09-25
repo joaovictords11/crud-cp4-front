@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { apiInstance } from "./axiosInstance";
 
-interface TodoProps {
+export type TodoProps = {
   id?: number;
   title: string;
   description: string;
   isComplete: boolean;
   targetId: number;
 }
-interface TargetProps {
+export type TargetProps = {
   id?: number;
   title: string;
   description: string;
@@ -16,25 +16,17 @@ interface TargetProps {
   todo: Array<TodoProps>;
 }
 
-const initialTarget = {
-  description: "",
-  title: "",
-  isComplete: false,
-  todo: [],
-};
-
 const useApiData = () => {
   const [targets, setTargets] = useState<TargetProps[]>([]);
   const [todos, setTodos] = useState<TodoProps[]>([]);
   const [targetId, setTargetId] = useState<number>(0);
-  const [targetToPost, setTargetToPost] = useState<TargetProps>(initialTarget);
 
   // T A R G E T S ------------------------------------------------------------------
 
   const getTargets = async () => {
     try {
       const response = await apiInstance.get("Targets");
-      setTargets(response.data); // Armazena os dados recebidos no estado
+      setTargets(response.data);
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
@@ -49,19 +41,26 @@ const useApiData = () => {
     }
   };
 
-  const postTarget = async (description: TargetProps) => {
+  const postTarget = async (description: Omit<TargetProps, "isComplete" | "id" | "todo">) => {
     try {
-      const response = await apiInstance.post("Targets", { ...description });
+      const response = await apiInstance.post("Targets", {
+        id: 0,
+        isComplete: false,
+        todo: [],
+        ...description
+      });
       console.log(response.data);
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
   };
 
-  const putTarget = async (targetId: number, updates: Omit<TargetProps, "id">) => {
+  const putTarget = async (targetId: number, updates: Omit<TargetProps, "id" | "todo" | "isComplete">) => {
     try {
-      const response = await apiInstance.post(`Targets/${targetId}`, {
+      const response = await apiInstance.put(`Targets/${targetId}`, {
         id: targetId,
+        isComplete: false,
+        todo: [],
         ...updates
       });
       console.log(response.data);
@@ -73,7 +72,7 @@ const useApiData = () => {
   const deleteTarget = async (targetId: number) => {
     try {
       const response = await apiInstance.delete(`Targets/${targetId}`);
-      console.log(response.data); // Armazena os dados recebidos no estado
+      console.log(response.data);
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
@@ -103,9 +102,12 @@ const useApiData = () => {
     }
   };
 
-  const postTodo = async (description: TodoProps) => {
+  const postTodo = async (description: Omit<TodoProps, "isComplete">) => {
     try {
-      const response = await apiInstance.post("Todo", { ...description });
+      const response = await apiInstance.post("Todo", {
+        isComplete: false,
+        ...description
+      });
       console.log(response.data);
     } catch (error) {
       console.error("Erro na requisição:", error);
@@ -146,8 +148,6 @@ const useApiData = () => {
     setTodos,
     targetId,
     setTargetId,
-    targetToPost,
-    setTargetToPost,
     //Targets
     getTargets,
     getTargetById,
