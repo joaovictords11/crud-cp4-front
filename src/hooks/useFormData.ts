@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 // };
 
 const useFormData = () => {
-  const { putTarget, reloadData } = useApiData();
+  const { putTarget} = useApiData();
 
   const [targetEditModal, setTargetEditModal] = useState<boolean>(false);
   const [targetToEdit, setTargetToEdit] = useState<Omit<TargetProps, "todo" | "isComplete"> | null>(null);
@@ -22,11 +22,10 @@ const useFormData = () => {
 
     if (data) {
       await putTarget(data.id!, data);
-      await reloadData();
       setTargetEditModal(false);
       setTargetToEdit(null)
     }else{
-        console.log("Ops, erro ao enviar!")
+      console.log("Ops, erro ao enviar!")
     }
   };
 

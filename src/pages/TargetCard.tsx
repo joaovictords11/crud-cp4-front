@@ -18,7 +18,7 @@ const TargetCard = ({ target, onDeleteTarget, onEdit }: TargetCardProps) => {
         <div className="flex gap-3">
           <button
             onClick={() => setShowToDos(!showToDos)}
-            className="bg-gray-500 hover:bg-slate-600 px-3 py-2 rounded-lg"
+            className="bg-gray-500 hover:bg-slate-600 px-3 py-2 rounded-lg shadow duration-300"
           >
             {!showToDos ? (
               <FaArrowDown className="text-white" />
@@ -29,14 +29,14 @@ const TargetCard = ({ target, onDeleteTarget, onEdit }: TargetCardProps) => {
           {target.id && (
             <button
               onClick={() => onDeleteTarget(target.id!)}
-              className="bg-red-500 hover:bg-red-600 px-3 py-2 rounded-lg"
+              className="bg-red-500 hover:bg-red-600 px-3 py-2 rounded-lg shadow duration-300"
             >
               <FaRegTrashAlt className="text-white" />
             </button>
           )}
           <button
             onClick={() => onEdit(target)}
-            className="bg-gray-300 hover:bg-slate-400 px-3 py-2 rounded-lg"
+            className="bg-gray-300 hover:bg-slate-400 px-3 py-2 rounded-lg shadow duration-300"
           >
             <FaPen />
           </button>

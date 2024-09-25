@@ -41,10 +41,12 @@ const useApiData = () => {
     }
   };
 
-  const postTarget = async (description: Omit<TargetProps, "isComplete">) => {
+  const postTarget = async (description: Omit<TargetProps, "isComplete" | "id" | "todo">) => {
     try {
       const response = await apiInstance.post("Targets", {
+        id: 0,
         isComplete: false,
+        todo: [],
         ...description
       });
       console.log(response.data);

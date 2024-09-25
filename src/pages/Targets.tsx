@@ -3,9 +3,11 @@ import useApiData, { TargetProps } from "../hooks/useApiData";
 import TargetCard from "./TargetCard";
 import TargetEditModal from "../components/TargetEditModal";
 import useFormData from "../hooks/useFormData";
+import AddTodoForm from "../components/AddTodoForm";
+import { toast } from "react-toastify";
 
 const Target = () => {
-  const { deleteTarget, reloadData, targets, setTargets } = useApiData();
+  const { deleteTarget, reloadData, targets } = useApiData();
   const {
     setTargetEditModal,
     targetEditModal,
@@ -20,11 +22,13 @@ const Target = () => {
   const handleDeleteTarget = async (id: number) => {
     await deleteTarget(id);
     await reloadData();
+    toast.error("Target excluído!")
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async() => {
     setTargetEditModal(false)
     setTargetToEdit(null)
+    await reloadData()
   }
 
   const handleSetTargetToUpdate = (target: TargetProps) => {
@@ -32,16 +36,13 @@ const Target = () => {
     setTargetEditModal(true);
   };
 
-  const updateTarget = (updatedTarget: TargetProps) => {
-    setTargets((prevTargets) =>
-      prevTargets.map((target) =>
-        target.id === updatedTarget.id ? updatedTarget : target
-      )
-    );
-  };
+  const handleReload = async () => {
+    await reloadData()
+  }
 
   return (
     <>
+      <AddTodoForm onReload={handleReload}/>
       {targets === undefined ? (
         <p className="flex justify-center my-8 text-xl">Carregando Targets...</p>
       ) : targets.length === 0 ? (
@@ -60,7 +61,6 @@ const Target = () => {
             <TargetEditModal
               target={targetToEdit}
               onCloseModal={handleCloseModal}
-              onUpdateTarget={updateTarget}
             />
           )}
         </section>
