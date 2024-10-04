@@ -3,9 +3,10 @@ import { TodoProps } from "../hooks/useApiData";
 
 type TodoCardProps = {
   todo: TodoProps;
+  onSetTodoStatus: (todo: TodoProps) => void
 };
 
-const TodoCard = ({ todo }: TodoCardProps) => {
+const TodoCard = ({ todo, onSetTodoStatus }: TodoCardProps) => {
   return (
     <div
       className={`bg-gray-200 flex justify-between py-4 px-6 w-80 shadow-md rounded-md ${
@@ -19,6 +20,7 @@ const TodoCard = ({ todo }: TodoCardProps) => {
             todo.isComplete ? "text-white" : "text-green-600"
           }`}
           size={20}
+          onClick={() => onSetTodoStatus(todo)}
         />
       </button>
     </div>
