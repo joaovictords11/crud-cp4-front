@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { FaArrowDown, FaArrowUp, FaPen, FaRegTrashAlt } from "react-icons/fa";
-import { TargetProps } from "../hooks/useApiData";
-import TargetsTodoCard from "./TargetsTodoCard";
+import { FaRegTrashAlt, FaArrowDown, FaArrowUp, FaPen } from "react-icons/fa";
+import { TargetProps, TodoProps } from "../hooks/useApiData";
+import TodoCard from "./TargetsTodoCard";
 
 type TargetCardProps = {
   target: TargetProps;
   onDeleteTarget: (id: number) => void;
   onEdit: (target: TargetProps) => void;
+  handleTodoStatus: (todo: TodoProps) => void
 };
 
-const TargetCard = ({ target, onDeleteTarget, onEdit }: TargetCardProps) => {
+const TargetCard = ({ target, onDeleteTarget, onEdit, handleTodoStatus }: TargetCardProps) => {
   const [showToDos, setShowToDos] = useState(false);
   
   return (
@@ -46,8 +47,8 @@ const TargetCard = ({ target, onDeleteTarget, onEdit }: TargetCardProps) => {
       {showToDos && (
         <div className="flex flex-col gap-4">
           {target.todo.length > 0 ? (
-            target.todo.map((todo) => (
-              <TargetsTodoCard key={todo.id} todo={todo} />
+            target.todo.map((todo: TodoProps) => (
+              <TodoCard key={todo.id!} todo={todo} onSetTodoStatus={handleTodoStatus}/>
             ))
           ) : (
             <p>Não há ToDos no momento</p>
