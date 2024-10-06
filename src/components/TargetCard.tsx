@@ -27,6 +27,7 @@ type TargetCardProps = {
   todoTitle: string;
   setTodoTitle: React.Dispatch<React.SetStateAction<string>>;
   toggleTargetStatus: (target: TargetProps) => Promise<void>;
+  onEditTodo: (todo: TodoProps) => void;
 };
 
 const TargetCard = ({
@@ -41,6 +42,7 @@ const TargetCard = ({
   setTodoTitle,
   todoTitle,
   toggleTargetStatus,
+  onEditTodo,
 }: TargetCardProps) => {
   const [showToDos, setShowToDos] = useState(false);
 
@@ -75,7 +77,7 @@ const TargetCard = ({
               <FaArrowUp className="text-white" />
             )}
           </button>
-          
+
           <button
             onClick={() => onEdit(target)}
             className="bg-gray-300 hover:bg-slate-400 px-3 py-2 rounded-md"
@@ -98,12 +100,14 @@ const TargetCard = ({
             <div className="flex flex-col items-center">
               {target.todo.map((todo: TodoProps) => (
                 <TodoCard
-                  key={todo.id!}
+                  key={todo.id}
                   todo={todo}
                   onSetTodoStatus={handleTodoStatus}
                   onDeleteTodo={handleDeleteTodo}
+                  onEditTodo={onEditTodo}
                 />
               ))}
+              
               <AddTodoBtn
                 formAddState={showAddTodoForm}
                 onAddTodo={setShowAddTodoForm}

@@ -5,6 +5,8 @@ import TargetEditModal from "../components/TargetEditModal";
 import useFormData from "../hooks/useFormData";
 import { toast } from "react-toastify";
 import AddTargetForm from "../components/AddTargetForm";
+import useEditTodo from "../hooks/useEditTodo";
+import TodoEditModal from "../components/TodoEditModal";
 
 const Target = () => {
   const {
@@ -16,8 +18,12 @@ const Target = () => {
     postTodo,
     putTarget,
   } = useApiData();
+
   const { setTargetEditModal, targetEditModal, targetToEdit, setTargetToEdit } =
     useFormData();
+
+  const { setShowEditTodo, setTodoToEdit, showEditTodo, todoToEdit } =
+    useEditTodo();
 
   const [showAddTodoForm, setShowAddTodoForm] = useState(false);
   const [todoTitle, setTodoTitle] = useState("");
@@ -44,9 +50,20 @@ const Target = () => {
     await reloadData();
   };
 
+  const handleCloseEditTodoModal = async () => {
+    setShowEditTodo(false);
+    setTodoToEdit(null);
+    await reloadData();
+  };
+
   const handleSetTargetToUpdate = (target: TargetProps) => {
     setTargetToEdit(target);
     setTargetEditModal(true);
+  };
+
+  const handleSetTodoToUpdate = (todo: TodoProps) => {
+    setTodoToEdit(todo);
+    setShowEditTodo(true);
   };
 
   const handleReload = async () => {
@@ -55,10 +72,10 @@ const Target = () => {
 
   const handleTodoStatus = async (todo: TodoProps) => {
     await putTodo(todo.id!, { ...todo, isComplete: !todo.isComplete });
-    if(todo.isComplete !== true){
-      toast.success("Marcado como concluído!")
-    }else{
-      toast.info("Concluído removido!")
+    if (todo.isComplete !== true) {
+      toast.success("Marcado como concluído!");
+    } else {
+      toast.info("Concluído removido!");
     }
     await reloadData();
   };
@@ -76,13 +93,13 @@ const Target = () => {
   };
 
   const toggleTargetStatus = async (target: TargetProps) => {
-    await putTarget(target.id!, {...target, isComplete: !target.isComplete});
-    if(target.isComplete !== true){
-      toast.success("Marcado como concluído!")
-    }else{
-      toast.info("Concluído removido!")
+    await putTarget(target.id!, { ...target, isComplete: !target.isComplete });
+    if (target.isComplete !== true) {
+      toast.success("Marcado como concluído!");
+    } else {
+      toast.info("Concluído removido!");
     }
-    await reloadData()
+    await reloadData();
   };
 
   return (
@@ -104,6 +121,7 @@ const Target = () => {
               target={target}
               onDeleteTarget={handleDeleteTarget}
               onEdit={handleSetTargetToUpdate}
+              onEditTodo={handleSetTodoToUpdate}
               handleTodoStatus={handleTodoStatus}
               handleDeleteTodo={handleDeleteTodo}
               showAddTodoForm={showAddTodoForm}
@@ -118,6 +136,12 @@ const Target = () => {
             <TargetEditModal
               target={targetToEdit}
               onCloseModal={handleCloseModal}
+            />
+          )}
+          {showEditTodo && todoToEdit && (
+            <TodoEditModal
+              todo={todoToEdit!}
+              onCloseModal={handleCloseEditTodoModal}
             />
           )}
         </section>

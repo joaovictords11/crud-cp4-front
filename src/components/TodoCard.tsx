@@ -6,10 +6,16 @@ import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
 type TodoCardProps = {
   todo: TodoProps;
   onSetTodoStatus: (todo: TodoProps) => void;
-  onDeleteTodo: (id: number) => void
+  onDeleteTodo: (id: number) => void;
+  onEditTodo: (todo: TodoProps) => void;
 };
 
-const TodoCard = ({ todo, onSetTodoStatus, onDeleteTodo }: TodoCardProps) => {
+const TodoCard = ({
+  todo,
+  onSetTodoStatus,
+  onDeleteTodo,
+  onEditTodo,
+}: TodoCardProps) => {
   return (
     <div
       className={`flex justify-between py-2 items-center px-10 w-targetCard rounded-md`}
@@ -35,7 +41,7 @@ const TodoCard = ({ todo, onSetTodoStatus, onDeleteTodo }: TodoCardProps) => {
         </h3>
       </div>
       <div className="flex items-center gap-4 ">
-        <button className="hover:opacity-70">
+        <button className="hover:opacity-70" onClick={() => onEditTodo(todo)}>
           <FaRegEdit size={17} />
         </button>
         <button
