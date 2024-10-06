@@ -1,49 +1,38 @@
-import { MdLibraryAdd } from "react-icons/md";
-import useApiData, { TargetProps } from "../hooks/useApiData";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { MdAddBox } from "react-icons/md";
 
 type AddTodoFormProps = {
-  onReload: () => void;
+  targetId: number;
+  onSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    targetId: number
+  ) => Promise<void>;
+  todoTitle: string;
+  setTodoTitle: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const AddTodoForm = ({ onReload }: AddTodoFormProps) => {
-  const { postTarget } = useApiData();
-
-  const { register, handleSubmit, reset } = useForm<TargetProps>();
-
-  const onPostTarget = async (
-    data: Omit<TargetProps, "isComplete" | "id" | "todo">
-  ) => {
-    await postTarget(data);
-    onReload();
-    reset();
-    toast.success("Target adicionado!");
-  };
+const AddTodoForm = ({
+  targetId,
+  onSubmit,
+  setTodoTitle,
+  todoTitle,
+}: AddTodoFormProps) => {
 
   return (
     <form
-      onSubmit={handleSubmit(onPostTarget)}
-      className="flex justify-center items-center gap-2 my-8"
+      className="flex items-center mt-2"
+      onSubmit={(e) => onSubmit(e, targetId)}
     >
       <input
-        {...register("title")}
-        placeholder="Título"
-        className="p-2 rounded-l-md outline-none shadow"
+        type="text"
+        value={todoTitle}
         required
+        minLength={3}
+        onChange={(e) => setTodoTitle(e.target.value)}
+        className="outline-none py-1 px-2 rounded-l-md"
+        placeholder="Digite o título..."
       />
-      <input
-        {...register("description")}
-        placeholder="Descrição"
-        className="p-2 outline-none shadow"
-        required
-      />
-      <button
-        type="submit"
-        className="bg-green-500 p-1 rounded-r-md shadow hover:opacity-70 duration-300"
-      >
-        <MdLibraryAdd className="text-white" size={30} />
+      <button className="bg-green-500 p-1 rounded-r-md hover:opacity-70">
+        <MdAddBox size={25} className="text-white" />
       </button>
     </form>
   );
