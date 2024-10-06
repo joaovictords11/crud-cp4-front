@@ -55,11 +55,10 @@ const useApiData = () => {
     }
   };
 
-  const putTarget = async (targetId: number, updates: Omit<TargetProps, "id" | "todo" | "isComplete">) => {
+  const putTarget = async (targetId: number, updates: Omit<TargetProps, "id" | "todo">) => {
     try {
       const response = await apiInstance.put(`Targets/${targetId}`, {
         id: targetId,
-        isComplete: false,
         todo: [],
         ...updates
       });
@@ -102,10 +101,11 @@ const useApiData = () => {
     }
   };
 
-  const postTodo = async (description: Omit<TodoProps, "isComplete">) => {
+  const postTodo = async (description: Omit<TodoProps, "isComplete" | "description">) => {
     try {
       const response = await apiInstance.post("Todo", {
         isComplete: false,
+        description: " ",
         ...description
       });
       console.log(response.data);

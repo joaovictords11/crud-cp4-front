@@ -14,7 +14,7 @@ const TargetEditModal = ({ onCloseModal, target }: TargetEditModalProps) => {
   const { register, handleSubmit, handleEditTarget } = useFormData();
 
   const onSubmit = async (
-    data: Omit<TargetProps, "id" | "todo" | "isComplete">
+    data: Omit<TargetProps, "id" | "todo">
   ) => {
     const updatedTarget = { ...data, id: target.id };
     await handleEditTarget(updatedTarget);
@@ -57,6 +57,10 @@ const TargetEditModal = ({ onCloseModal, target }: TargetEditModalProps) => {
             className={inputStyle}
             required
           />
+        </div>
+        <div className="flex gap-2">
+          <input type="checkbox" {...register("isComplete")}/>
+          <label>Marcar como completo</label>
         </div>
         <button
           type="submit"
