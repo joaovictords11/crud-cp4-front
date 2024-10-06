@@ -2,14 +2,6 @@ import { useState } from "react";
 import useApiData, { TargetProps } from "./useApiData";
 import { useForm } from "react-hook-form";
 
-// const initialTarget: TargetProps = {
-//   id: 77,  
-//   description: "",
-//   title: "",
-//   isComplete: false,
-//   todo: [],
-// };
-
 const useFormData = () => {
   const { putTarget} = useApiData();
 
