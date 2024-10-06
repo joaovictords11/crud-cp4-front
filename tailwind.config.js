@@ -11,6 +11,9 @@ export default {
         'targetCard': '530px',
       }
     },
+    screens: {
+      'small' : '570px',
+    }
   },
   plugins: [],
 }

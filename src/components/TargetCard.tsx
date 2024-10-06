@@ -46,11 +46,11 @@ const TargetCard = ({
 
   return (
     <section
-      className={`flex flex-col py-6 gap-6 items-center w-targetCard bg-gray-200 rounded-lg shadow-md ${
+      className={`flex flex-col py-6 gap-6 items-center max-small:w-11/12 w-targetCard bg-gray-200 rounded-lg shadow-md ${
         target.isComplete && "border border-green-500"
       }`}
     >
-      <div className="flex items-center justify-between bg-gray-200 w-[528px] px-10 text-center">
+      <div className="flex items-center max-small:flex-col max-small:gap-4 justify-between bg-gray-200 w-full px-10 text-center">
         <div className="flex items-center gap-4">
           <button
             className="hover:opacity-70"
@@ -93,7 +93,7 @@ const TargetCard = ({
         </div>
       </div>
       {showToDos && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full">
           {target.todo.length > 0 ? (
             <div className="flex flex-col items-center">
               {target.todo.map((todo: TodoProps) => (

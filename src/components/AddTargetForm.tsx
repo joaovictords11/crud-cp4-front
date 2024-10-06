@@ -25,23 +25,23 @@ const AddTargetForm = ({ onReload }: AddTargetFormProps) => {
   return (
     <form
       onSubmit={handleSubmit(onPostTarget)}
-      className="flex justify-center items-center gap-2 my-8"
+      className="flex justify-center max-small:flex-col max-small:gap-5 items-center gap-2 my-8"
     >
       <input
         {...register("title")}
         placeholder="Adicionar target..."
-        className="p-2 rounded-l-md outline-none shadow"
+        className="p-2 rounded-l-md outline-none shadow max-small:rounded"
         required
       />
       <input
         {...register("description")}
         placeholder="Descrição"
-        className="p-2 outline-none shadow"
+        className="p-2 outline-none shadow max-small:rounded"
         required
       />
       <button
         type="submit"
-        className="bg-green-500 p-1 rounded-r-md shadow hover:opacity-70 duration-300"
+        className="bg-green-500 p-1 flex justify-center max-small:mb-4 rounded-r-md max-small:w-[210px] max-small:rounded shadow hover:opacity-70 duration-300"
       >
         <MdLibraryAdd className="text-white" size={30} />
       </button>

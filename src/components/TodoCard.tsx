@@ -18,7 +18,7 @@ const TodoCard = ({
 }: TodoCardProps) => {
   return (
     <div
-      className={`flex justify-between py-2 items-center px-10 w-targetCard rounded-md`}
+      className={`flex justify-between py-2 items-center px-10 w-full rounded-md`}
     >
       <div className="flex items-center gap-2">
         <button>
