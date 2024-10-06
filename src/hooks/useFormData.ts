@@ -18,7 +18,7 @@ const useFormData = () => {
 
   const { register, handleSubmit} = useForm<Omit<TargetProps, "id">>();
 
-  const handleEditTarget = async (data: Omit<TargetProps, "todo" | "isComplete">) => {
+  const handleEditTarget = async (data: Omit<TargetProps, "todo">) => {
 
     if (data) {
       await putTarget(data.id!, data);
