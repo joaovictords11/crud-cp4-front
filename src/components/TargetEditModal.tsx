@@ -61,6 +61,7 @@ const TargetEditModal = ({ onCloseModal, target }: TargetEditModalProps) => {
             type="checkbox"
             {...register("isComplete")}
             defaultChecked={target?.isComplete}
+            className="cursor-pointer"
           />
           <label>Marcar como completo</label>
         </div>
