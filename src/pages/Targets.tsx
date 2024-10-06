@@ -127,7 +127,6 @@ const Target = () => {
               showAddTodoForm={showAddTodoForm}
               setShowAddTodoForm={setShowAddTodoForm}
               handleAddTodo={handleAddTodo}
-              todoTitle={todoTitle}
               setTodoTitle={setTodoTitle}
               toggleTargetStatus={toggleTargetStatus}
             />

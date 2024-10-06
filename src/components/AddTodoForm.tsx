@@ -6,7 +6,6 @@ type AddTodoFormProps = {
     e: React.FormEvent<HTMLFormElement>,
     targetId: number
   ) => Promise<void>;
-  todoTitle: string;
   setTodoTitle: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -14,7 +13,6 @@ const AddTodoForm = ({
   targetId,
   onSubmit,
   setTodoTitle,
-  todoTitle,
 }: AddTodoFormProps) => {
 
   return (
@@ -24,7 +22,6 @@ const AddTodoForm = ({
     >
       <input
         type="text"
-        value={todoTitle}
         required
         minLength={3}
         onChange={(e) => setTodoTitle(e.target.value)}

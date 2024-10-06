@@ -24,7 +24,6 @@ type TargetCardProps = {
     e: React.FormEvent<HTMLFormElement>,
     targetId: number
   ) => Promise<void>;
-  todoTitle: string;
   setTodoTitle: React.Dispatch<React.SetStateAction<string>>;
   toggleTargetStatus: (target: TargetProps) => Promise<void>;
   onEditTodo: (todo: TodoProps) => void;
@@ -40,7 +39,6 @@ const TargetCard = ({
   showAddTodoForm,
   handleAddTodo,
   setTodoTitle,
-  todoTitle,
   toggleTargetStatus,
   onEditTodo,
 }: TargetCardProps) => {
@@ -114,7 +112,6 @@ const TargetCard = ({
               />
               {showAddTodoForm && (
                 <AddTodoForm
-                  todoTitle={todoTitle}
                   setTodoTitle={setTodoTitle}
                   onSubmit={handleAddTodo}
                   targetId={target.id!}
@@ -130,7 +127,6 @@ const TargetCard = ({
               />
               {showAddTodoForm && (
                 <AddTodoForm
-                  todoTitle={todoTitle}
                   setTodoTitle={setTodoTitle}
                   onSubmit={handleAddTodo}
                   targetId={target.id!}
