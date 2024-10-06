@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 type TargetEditModalProps = {
   onCloseModal: () => void;
-  target: Omit<TargetProps, "todo" | "isComplete">;
+  target: Omit<TargetProps, "todo">;
 };
 
 const inputStyle = "p-2 rounded-md outline-none";
@@ -13,9 +13,7 @@ const inputStyle = "p-2 rounded-md outline-none";
 const TargetEditModal = ({ onCloseModal, target }: TargetEditModalProps) => {
   const { register, handleSubmit, handleEditTarget } = useFormData();
 
-  const onSubmit = async (
-    data: Omit<TargetProps, "id" | "todo">
-  ) => {
+  const onSubmit = async (data: Omit<TargetProps, "id" | "todo">) => {
     const updatedTarget = { ...data, id: target.id };
     await handleEditTarget(updatedTarget);
     onCloseModal();
@@ -59,7 +57,11 @@ const TargetEditModal = ({ onCloseModal, target }: TargetEditModalProps) => {
           />
         </div>
         <div className="flex gap-2">
-          <input type="checkbox" {...register("isComplete")}/>
+          <input
+            type="checkbox"
+            {...register("isComplete")}
+            defaultChecked={target?.isComplete}
+          />
           <label>Marcar como completo</label>
         </div>
         <button

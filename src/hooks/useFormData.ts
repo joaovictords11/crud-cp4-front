@@ -6,7 +6,7 @@ const useFormData = () => {
   const { putTarget} = useApiData();
 
   const [targetEditModal, setTargetEditModal] = useState<boolean>(false);
-  const [targetToEdit, setTargetToEdit] = useState<Omit<TargetProps, "todo" | "isComplete"> | null>(null);
+  const [targetToEdit, setTargetToEdit] = useState<Omit<TargetProps, "todo"> | null>(null);
 
   const { register, handleSubmit} = useForm<Omit<TargetProps, "id">>();
 
