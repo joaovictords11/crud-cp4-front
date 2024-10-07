@@ -30,13 +30,13 @@ const AddTargetForm = ({ onReload }: AddTargetFormProps) => {
       <input
         {...register("title")}
         placeholder="Adicionar target..."
-        className="p-2 rounded-l-md outline-none shadow max-small:rounded"
+        className="p-2 rounded-l-md outline-none shadow max-small:rounded max-small:w-[210px]"
         required
       />
       <input
         {...register("description")}
         placeholder="Descrição"
-        className="p-2 outline-none shadow max-small:rounded"
+        className="p-2 outline-none shadow max-small:rounded max-small:w-[210px]"
         required
       />
       <button
