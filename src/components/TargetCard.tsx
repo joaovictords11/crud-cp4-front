@@ -46,7 +46,7 @@ const TargetCard = ({
 
   return (
     <section
-      className={`flex flex-col py-6 gap-6 items-center max-small:w-11/12 w-targetCard bg-gray-200 rounded-lg shadow-md ${
+      className={`flex flex-col py-6 gap-6 items-center max-small:w-11/12 w-targetCard bg-gray-200 rounded-lg shadow-md hover:scale-105 duration-300 ${
         target.isComplete && "border border-green-500"
       }`}
     >
