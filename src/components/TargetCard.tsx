@@ -1,16 +1,16 @@
 import { useState } from "react";
 import {
-  FaRegTrashAlt,
   FaArrowDown,
   FaArrowUp,
   FaPen,
   FaRegCheckCircle,
   FaRegCircle,
+  FaRegTrashAlt,
 } from "react-icons/fa";
 import { TargetProps, TodoProps } from "../hooks/useApiData";
-import TodoCard from "./TodoCard";
 import AddTodoBtn from "./AddTodoBtn";
 import AddTodoForm from "./AddTodoForm";
+import TodoCard from "./TodoCard";
 
 type TargetCardProps = {
   target: TargetProps;
@@ -46,11 +46,10 @@ const TargetCard = ({
 
   return (
     <section
-      className={`flex flex-col py-6 gap-6 items-center max-small:w-11/12 w-targetCard bg-gray-200 rounded-lg shadow-md hover:scale-105 duration-300 ${
-        target.isComplete && "border border-green-500"
-      }`}
+      className={`flex flex-col py-6 gap-6 items-center max-small:w-11/12 w-targetCard bg-gray-200 rounded-lg shadow-md hover:scale-105 duration-300 ${target.isComplete && "border border-green-500"
+        }`}
     >
-      <div className="flex items-center max-small:flex-col max-small:gap-4 justify-between bg-gray-200 w-full px-10 text-center">
+      <div className="flex items-center gap-6 max-small:flex-col max-small:gap-4 justify-between bg-gray-200 w-full px-10 text-center">
         <div className="flex items-center gap-4">
           <button
             className="hover:opacity-70"
@@ -62,7 +61,7 @@ const TargetCard = ({
               <FaRegCircle size={20} />
             )}
           </button>
-          <h3 className="text-2xl">{target.title}</h3>
+          <h3 className="text-2xl break-all text-start">{target.title}</h3>
         </div>
         <div className="flex gap-3">
           <button
