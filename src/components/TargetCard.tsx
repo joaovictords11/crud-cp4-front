@@ -94,6 +94,9 @@ const TargetCard = ({
       </div>
       {showToDos && (
         <div className="flex flex-col gap-4 w-full">
+          <p className="px-10 flex text-lg font-medium mb-5">
+            Descrição: <span className="font-normal ml-2">{target.description}</span>
+          </p>
           {target.todo.length > 0 ? (
             <div className="flex flex-col items-center">
               {target.todo.map((todo: TodoProps) => (
@@ -105,7 +108,7 @@ const TargetCard = ({
                   onEditTodo={onEditTodo}
                 />
               ))}
-              
+
               <AddTodoBtn
                 formAddState={showAddTodoForm}
                 onAddTodo={setShowAddTodoForm}
