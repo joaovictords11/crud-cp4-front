@@ -122,7 +122,7 @@ const TargetCard = ({
               )}
             </div>
           ) : (
-            <div className="bg-gray-200 flex flex-col items-center gap-3 justify-center w-targetCard">
+            <div className="bg-gray-200 flex flex-col items-center gap-3 justify-center w-full">
               <p className="text-lg">Não há todos no momento...</p>
               <AddTodoBtn
                 formAddState={showAddTodoForm}
